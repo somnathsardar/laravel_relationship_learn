@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         DB::beginTransaction();
         $this->call([
             UserSeeder::class,
+            PostSeeder::class,
         ]);
         DB::commit();
     }
