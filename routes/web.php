@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/users/{id}/posts', function($id) {
+    $usersPosts = User::whereId($id)->with('posts')->get();
+    return response($usersPosts);
+});
+
+Route::get('posts/{id}/users', function ($id) {
+    $postUser = Post::whereId($id)->with('user')->get();
+    return response($postUser);
 });
